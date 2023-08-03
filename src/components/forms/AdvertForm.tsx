@@ -13,15 +13,16 @@ const initialAdvert: AdvertType = {
     name: '',
     category: "Property",
     price: 0,
-    // otherDetails: JSON.stringify({ propertyType: 'Flat', propertyBuyType: '', square: 0, tax: 0 })
-    otherDetails: {}
+    otherDetails: null
 };
 
 const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
 
-    // console.log({...advertUpdated, otherDetails: JSON.parse(advertUpdated!.otherDetails)});
+    function getInitAdvert(): AdvertType {
+        return advertUpdated ? { ...advertUpdated, otherDetails: JSON.parse(advertUpdated.otherDetails) } : initialAdvert
+    }
 
-    const [advert, setAdvert] = useState<AdvertType>(advertUpdated || initialAdvert)
+    const [advert, setAdvert] = useState<AdvertType>(getInitAdvert())
 
     console.log(advert);
 
@@ -49,9 +50,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function propertyTypeHandler(event: any) {
         const propertyType: string = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.propertyType = propertyType;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.propertyType = propertyType;
         setAdvert(advertCopy);
     }
@@ -59,9 +57,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function propertyBuyTypeHandler(event: any) {
         const propertyBuyType: string = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.propertyBuyType = propertyBuyType;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.propertyBuyType = propertyBuyType;
         setAdvert(advertCopy);
     }
@@ -69,9 +64,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function propertySquareHandler(event: any) {
         const propertySquare: number = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.propertySquare = propertySquare;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.propertySquare = propertySquare;
         setAdvert(advertCopy);
     }
@@ -79,9 +71,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function propertyTaxHandler(event: any) {
         const propertyTax: number = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.propertyTax = propertyTax;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.propertyTax = propertyTax;
         setAdvert(advertCopy);
     }
@@ -89,9 +78,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function electricCategoryHandler(event: any) {
         const electricCategory: string = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.electricCategory = electricCategory;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.electricCategory = electricCategory;
         setAdvert(advertCopy);
     }
@@ -99,9 +85,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function electricQualityHandler(event: any) {
         const electricQuality: number = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.electricQuality = electricQuality;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.electricQuality = electricQuality;
         setAdvert(advertCopy);
     }
@@ -109,9 +92,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function vehicleBrandHandler(event: any) {
         const vehicleBrand: string = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.vehicleBrand = vehicleBrand;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.vehicleBrand = vehicleBrand;
         setAdvert(advertCopy);
     }
@@ -119,9 +99,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function vehicleModelHandler(event: any) {
         const vehicleModel: string = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.vehicleModel = vehicleModel;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.vehicleModel = vehicleModel;
         setAdvert(advertCopy);
     }
@@ -129,9 +106,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function vehicleYearHandler(event: any) {
         const vehicleYear: number = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.vehicleYear = vehicleYear;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.vehicleYear = vehicleYear;
         setAdvert(advertCopy);
     }
@@ -139,9 +113,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function vehicleColorHandler(event: any) {
         const vehicleColor: string = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.vehicleColor = vehicleColor;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.vehicleColor = vehicleColor;
         setAdvert(advertCopy);
     }
@@ -149,43 +120,28 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
     function vehicleMileageHandler(event: any) {
         const vehicleMileage: number = event.target.value;
         const advertCopy = { ...advert };
-        // const advertCopyDetails = JSON.parse(advert.otherDetails);
-        // advertCopyDetails.vehicleMileage = vehicleMileage;
-        // advertCopy.otherDetails = JSON.stringify(advertCopyDetails);
         advertCopy.otherDetails.vehicleMileage = vehicleMileage;
         setAdvert(advertCopy);
     }
 
-    // function setPropertyDetails() {
-    //     advert.otherDetails = JSON.stringify({ propertyType: '', propertyBuyType: '', propertySquare: 0, propertyTax: 0 })
-    // }
-
-    // function setElectricDetails() {
-    //     advert.otherDetails = JSON.stringify({ electricCategory: '', electricQuality: '' })
-    // }
-
-    // function setVehicleDetails() {
-    //     advert.otherDetails = JSON.stringify({ vehicleBrand: '', vehicleModel: '', vehicleYear: 0, vehicleColor: '', vehicleMileage: 0 })
-    // }
-
     function onResetFn(event: any) {
         event.preventDefault();
-        setAdvert(advertUpdated || initialAdvert);
+        setAdvert(getInitAdvert());
     }
 
     async function onSubmitFn(event: any) {
         event.preventDefault();
         const res: Boolean = await submitFn(advert);
         if (res) {
-            setAdvert(advertUpdated || initialAdvert);
+            setAdvert(getInitAdvert());
         }
     }
 
     const renderComponent = () => {
 
-        if (typeof advert.otherDetails == 'string') {
-            advert.otherDetails = JSON.parse(advert.otherDetails);
-        }
+        // if (typeof advert.otherDetails == 'string') {
+        //     advert.otherDetails = JSON.parse(advert.otherDetails);
+        // }
 
         switch (advert.category) {
             case 'Property': return <Grid container spacing={4} justifyContent="center">
@@ -195,7 +151,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         <Select
                             labelId="select-property-type"
                             label="Property type"
-                            // value={JSON.parse(advert.otherDetails).propertyType}
                             value={advert.otherDetails?.propertyType || ''}
                             onChange={propertyTypeHandler}
                         >
@@ -211,7 +166,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         <Select
                             labelId="select-buy-type"
                             label="Buy type"
-                            // value={JSON.parse(advert.otherDetails).propertyBuyType}
                             value={advert.otherDetails?.propertyBuyType || ''}
                             onChange={propertyBuyTypeHandler}
                         >
@@ -226,7 +180,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         type="number"
                         fullWidth
                         label="Square"
-                        // value={JSON.parse(advert.otherDetails).propertySquare}
                         value={advert.otherDetails?.propertySquare || ''}
                         InputProps={{
                             inputProps: { min: 40, max: 5000 }
@@ -239,7 +192,6 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         type="number"
                         fullWidth
                         label="Tax"
-                        // value={JSON.parse(advert.otherDetails).propertyTax}
                         value={advert.otherDetails?.propertyTax || ''}
                         InputProps={{
                             inputProps: { min: 1, max: 10000 }
@@ -254,8 +206,7 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         <Select
                             labelId="select-electric-category"
                             label="Electric category"
-                            // value={JSON.parse(advert.otherDetails).electricCategory}
-                            value={advert.otherDetails.electricCategory}
+                            value={advert.otherDetails?.electricCategory || ''}
                             onChange={electricCategoryHandler}
                         >
                             <MenuItem value="Fridge" key="Fridge">Fridge</MenuItem>
@@ -273,8 +224,7 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         <Select
                             labelId="select-electric-quality"
                             label="Electric quality"
-                            // value={JSON.parse(advert.otherDetails).electricQuality}
-                            value={advert.otherDetails.electricQuality}
+                            value={advert.otherDetails?.electricQuality || ''}
                             onChange={electricQualityHandler}
                         >
                             <MenuItem value="New" key="New">New</MenuItem>
@@ -290,8 +240,7 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         type="text"
                         fullWidth
                         label="Brand"
-                        // value={JSON.parse(advert.otherDetails).electricCategory}
-                        value={advert.otherDetails.electricCategory}
+                        value={advert.otherDetails?.vehicleBrand || ''}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -300,8 +249,7 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         type="text"
                         fullWidth
                         label="Model"
-                        // value={JSON.parse(advert.otherDetails).vehicleModel}
-                        value={advert.otherDetails.vehicleModel}
+                        value={advert.otherDetails?.vehicleModel || ''}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -310,8 +258,7 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         type="number"
                         fullWidth
                         label="Year"
-                        // value={JSON.parse(advert.otherDetails).vehicleYear}
-                        value={advert.otherDetails.vehicleYear}
+                        value={advert.otherDetails?.vehicleYear || ''}
                         InputProps={{
                             inputProps: { min: 1885, max: new Date().getFullYear() }
                         }}
@@ -323,8 +270,7 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         type="text"
                         fullWidth
                         label="Color"
-                        // value={JSON.parse(advert.otherDetails).vehicleColor}
-                        value={advert.otherDetails.vehicleColor}
+                        value={advert.otherDetails?.vehicleColor || ''}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -333,8 +279,7 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
                         type="number"
                         fullWidth
                         label="Mileage"
-                        // value={JSON.parse(advert.otherDetails).vehicleMileage}
-                        value={advert.otherDetails.vehicleMileage}
+                        value={advert.otherDetails?.vehicleMileage || ''}
                         InputProps={{
                             inputProps: { min: 0, max: 1000000 }
                         }}
@@ -345,27 +290,8 @@ const AdvertForm: React.FC<FormProps> = ({ submitFn, advertUpdated }) => {
         }
     }
 
-    // useEffect(() => {
-    //     if (!advertUpdated) {
-    //         console.log(advert.category);
-    //         switch (advert.category) {
-    //             case "Property":
-    //                 setPropertyDetails()
-    //                 break;
-    //             case "Vehicles":
-    //                 setVehicleDetails()
-    //                 break;
-    //             case "Electrical goods":
-    //                 setElectricDetails()
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //     }
-    // }, [advert.category])
-
-    return <Box sx={{ marginTop: { sm: "25vh" } }}>
-
+    return <Box>
+        {}
         <form onSubmit={onSubmitFn} onReset={onResetFn}>
             <Grid container spacing={4} justifyContent="center">
                 <Grid item xs={12}>

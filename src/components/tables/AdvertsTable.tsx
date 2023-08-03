@@ -1,7 +1,6 @@
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid"
 import AdvertType from "../../model/AdvertType"
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, Paper, PaperProps } from "@mui/material"
-import { title } from "process"
 import { Delete, Edit } from "@mui/icons-material"
 import { advertsService } from "../../config/service-config"
 import { useMemo, useState } from "react"
@@ -32,10 +31,12 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    maxHeight: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    overflowY: "scroll"
 };
 
 type AdvertsTableProps = {
@@ -43,8 +44,6 @@ type AdvertsTableProps = {
 }
 
 const AdvertsTable: React.FC<AdvertsTableProps> = ({ adverts }) => {
-
-    console.log(JSON.stringify(adverts));
     
     const actionsColumns: GridColDef[] = [
         {
@@ -83,11 +82,7 @@ const AdvertsTable: React.FC<AdvertsTableProps> = ({ adverts }) => {
 
     function openUpdateDialog(id: any) {
         setActionID(id);
-        const advert = adverts.find(advert => advert.id == id)
-        
-        // console.log(adverts);
-        // console.log(advert);
-         
+        const advert = adverts.find(advert => advert.id == id)         
         setAdvertToUpdate(advert)
         setUpdateDialogOpened(true);
     }
