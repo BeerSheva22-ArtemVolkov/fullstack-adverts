@@ -7,11 +7,10 @@ const AddAdvert: React.FC = () => {
 
     const addNewAdvert = async (newAdvert: AdvertType) => {
         const response = await advertsService.addAdvert(newAdvert)
-        console.log(response);
         return response
     }
 
-    return <Box sx={{margin: '10vh'}}>
+    return <Box sx={{marginLeft: '30%', marginRight: '30%'}}>
         <AdvertForm submitFn={addNewAdvert} />
     </Box>
 }

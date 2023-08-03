@@ -1,5 +1,4 @@
-import { Box, TextField, Typography } from "@mui/material"
-import { GridColDef, DataGrid } from "@mui/x-data-grid";
+import { Box, TextField } from "@mui/material"
 import { useSelectorAllAdverts } from "../../hooks/hooks";
 import { advertsService } from "../../config/service-config";
 import { useEffect, useState } from "react";

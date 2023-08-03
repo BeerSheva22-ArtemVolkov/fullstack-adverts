@@ -1,6 +1,6 @@
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid"
 import AdvertType from "../../model/AdvertType"
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, Paper, PaperProps } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal } from "@mui/material"
 import { Delete, Edit } from "@mui/icons-material"
 import { advertsService } from "../../config/service-config"
 import { useMemo, useState } from "react"
@@ -67,7 +67,7 @@ const AdvertsTable: React.FC<AdvertsTableProps> = ({ adverts }) => {
     const [deleteDialogOpened, setDeleteDialogOpened] = useState<boolean>(false);
     const [updateDialogOpened, setUpdateDialogOpened] = useState<boolean>(false);
     const [advertToUpdate, setAdvertToUpdate] = useState<AdvertType | null>();
-    const [adctionID, setActionID] = useState<number>(0)
+    let [adctionID, setActionID] = useState<number>(0)
 
     const columns = useMemo(() => getColumns(), [adverts]);
 
@@ -139,28 +139,9 @@ const AdvertsTable: React.FC<AdvertsTableProps> = ({ adverts }) => {
             onClose={closeUpdateDialog}
         >
             <Box sx={style}>
-                <AdvertForm submitFn={actualUpdateAdvert} advertUpdated={advertToUpdate!} />
+                <AdvertForm submitFn={actualUpdateAdvert} advertUpdated={advertToUpdate!} editMode={true} />
             </Box>
         </Modal>
-        {/* <Modal
-            open={openWatch}
-            onClose={() => {
-                setFlWatch(false)
-                setWatchMode('')
-            }}
-            aria-labelledby="modal-modal-title"
-        >
-            <Box sx={style}>
-                <EmployeeForm
-                    submitFn={updateEmployee}
-                    employeeUpdated={employee.current}
-                    watchMode={watchMode}
-                    deleteFn={() => {
-                        removeEmployee(employee.current!.id)
-                        setFlWatch(false)
-                    }} />
-            </Box>
-        </Modal> */}
     </Box>
 }
 

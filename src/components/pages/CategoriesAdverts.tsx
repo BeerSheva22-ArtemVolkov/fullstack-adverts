@@ -13,17 +13,9 @@ const CategoriesAdverts: React.FC = () => {
     const [category, setCategory] = useState<CategoryType>("Vehicles");
     const allAdverts = useSelectorAllAdverts();
 
-    // console.log(allAdverts);
-    console.log(adverts); 
-
-
     function getCurrentAdverts() {
         advertsService.getAdvertsByCategory(category).then(advs => {
-            console.log(advs); 
-            
-            if (advs.length) {
-                setAdverts(advs)
-            }
+            setAdverts(advs)
         });
     }
 

@@ -5,8 +5,6 @@ import AllAdverts from './components/pages/AllAdverts';
 import CategoriesAdverts from './components/pages/CategoriesAdverts';
 import PricesAdverts from './components/pages/PricesAdverts';
 import NotFound from './components/pages/NotFound';
-import AdvertForm from './components/forms/AdvertForm';
-import AdvertType from './model/AdvertType';
 import AddAdvert from './components/pages/AddAdvert';
 
 function App() {
@@ -20,12 +18,6 @@ function App() {
                 <Route path="/*" element={<NotFound />} />
             </Route>
         </Routes>
-        {/* <Snackbar open={!!alertMessage} autoHideDuration={20000}
-            onClose={() => dispatch(codeActions.reset())}>
-            <Alert onClose={() => dispatch(codeActions.reset())} severity={severity} sx={{ width: '100%' }}>
-                {alertMessage}
-            </Alert>
-        </Snackbar> */}
     </BrowserRouter>
 }
 
